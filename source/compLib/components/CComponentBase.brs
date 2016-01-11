@@ -1,0 +1,55 @@
+function CComponentBase() as Object
+
+    'make sure the global componentCount value is ready
+    if( GetGlobalAA().componentCount = Invalid)
+        GetGlobalAA().componentCount = 0
+    end if
+    
+    this = {}
+    this.active = true
+    this.componentType = "base"
+    this.renderer = Invalid             'TODO: allow a component to have multiple renderers
+
+    'assign each component a unique id and increment the global count
+    this.id = GetGlobalAA().componentCount
+    GetGlobalAA().componentCount = GetGlobalAA().componentCount + 1
+    
+    
+    this.fActivate = function()
+        'don't trigger OnActivate if the component was already active
+        if(m.active = false)
+            m.active = true
+            m.fOnActivate()
+        end if
+    end function 'Activate
+    
+    this.fDeactivate = function()
+        'don't trigger OnDeactivate if the component was already inactive
+        if(m.active = true)
+            m.active = false
+            m.fOnDeactivate()
+        end if
+    end function 'Deactivate
+
+
+
+
+
+    'Overwrite these functions if needed in "derived" components 
+    this.fOnActivate = function()
+    end function 'OnActivate
+    this.fOnDeactivate = function()
+    end function 'OnDeactivate
+    
+    this.fShow = function()
+    end function 'fShow
+    this.fHide = function()
+        m.renderer = Invalid
+    end function 'fHide
+    
+    this.fUpdate = function(deltaMilliseconds)
+    end function    'fUpdate
+    
+    return this
+    
+end function 'CComponentBase
