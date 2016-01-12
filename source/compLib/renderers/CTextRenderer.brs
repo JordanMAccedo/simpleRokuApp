@@ -1,4 +1,4 @@
-function CTextRenderer (hostComponent) as Object
+function CTextRenderer () as Object
 
     this = CRendererBase()
     

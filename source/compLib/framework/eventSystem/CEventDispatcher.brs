@@ -5,14 +5,14 @@ function CEventDispatcher ()
     
     
     this.fAddEventListener = function (eventType, listeningObjectName as String, listeningFunctionName as String, listeningObject as Object)
-    
+
         listener = CEventListener(listeningObjectName, listeningFunctionName)
         
         if(m.eventListenerAA[eventType] = Invalid)
             m.eventListenerAA[eventType] = {}
-            m.eventListenerAA[eventType][listeningObjectName + "::" + listeningFunctionName] = CEventListener(listeningObject, listeningFunctionName) 
         end if
     
+        m.eventListenerAA[eventType][listeningObjectName + "::" + listeningFunctionName] = CEventListener(listeningObject, listeningFunctionName)
     end function    'fAddEventListener
     
     

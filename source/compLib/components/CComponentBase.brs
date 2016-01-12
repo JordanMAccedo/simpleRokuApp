@@ -9,6 +9,7 @@ function CComponentBase() as Object
     this.active = true
     this.componentType = "base"
     this.renderer = Invalid             'TODO: allow a component to have multiple renderers
+    this.appObject = Invalid        'reference to the CAppObject that contains this component
 
     'assign each component a unique id and increment the global count
     this.id = GetGlobalAA().componentCount
@@ -32,10 +33,13 @@ function CComponentBase() as Object
     end function 'Deactivate
 
 
+    this.fSetAppObjectReference = function (appObjectReference)
+        m.appObject = appObjectReference
+        m.fOnAddedToObject()
+    end function    'fSetAppObjectReference
 
 
-
-    'Overwrite these functions if needed in "derived" components 
+    '=== Overwrite these functions if needed in "derived" components ===
     this.fOnActivate = function()
     end function 'OnActivate
     this.fOnDeactivate = function()
@@ -49,6 +53,11 @@ function CComponentBase() as Object
     
     this.fUpdate = function(deltaMilliseconds)
     end function    'fUpdate
+    
+    this.fOnAddedToObject = function()
+    end function    'fOnAddedToObject
+    
+    '=== do not overwrite anything beyond this line ===
     
     return this
     

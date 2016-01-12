@@ -16,7 +16,7 @@ function CShapeComponent(shapeDescriptor) as Object
     this.scaleY = 1
     
     this.fShow = function ()
-        m.renderer = CShapeRenderer(m)
+        m.renderer = CShapeRenderer()
     end function 'fShow
     
     return this

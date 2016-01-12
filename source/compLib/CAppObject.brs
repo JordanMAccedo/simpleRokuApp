@@ -44,6 +44,8 @@ function CAppObject()
             m.componentAA = []
         end if
 
+        newComponent.fSetAppObjectReference(m)
+
         m.componentAA.push(newComponent)
         
     end function 'fAddComponent

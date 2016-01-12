@@ -18,7 +18,7 @@ function CTextComponent (textDescriptor, fontManager)
     this.y = textDescriptor.position.y
 
     this.fShow = function ()
-        m.renderer = CTextRenderer(m)
+        m.renderer = CTextRenderer()
     end function 'fShow
     
     return this

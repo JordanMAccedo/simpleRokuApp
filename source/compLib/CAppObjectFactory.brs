@@ -32,6 +32,11 @@ function CAppObjectFactory()
         else if (descriptor.componentType = "text")
             createdComponent = CTextComponent(descriptor, m.fontManager)
             createdComponent.fShow()
+        else if (descriptor.componentType = "tween")
+            createdComponent = CTweenComponent(descriptor)
+        else if (descriptor.componentType = "bitmap")
+            createdComponent = CBitmapComponent(descriptor)
+            createdComponent.fShow()
         end if
         
         

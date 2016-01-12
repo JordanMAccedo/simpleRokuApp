@@ -2,7 +2,9 @@ function CComponentLibrary()
     print 'ComponentLibrary v0.1'
 
     GetGlobalAA().eventDispatcher = CEventDispatcher()
-    GetGlobalAA().appTime = CAppTime(30)
+    GetGlobalAA().appTime = CAppTime(60)
+    GetGlobalAA().globalMessagePort = CMessagePort()
+    GetGlobalAA().bitmapCache = CBitmapCache()
 
     this = {}
     this.appObjectFactory = CAppObjectFactory()
@@ -31,6 +33,9 @@ function CComponentLibrary()
     
     this.fUpdate = function(deltaMilliseconds)
     
+        msgPort = GetGlobalAA().globalMessagePort
+        msgPort.fReadMessageQueue()
+        
         currentNode = m.appObjectDLL.head
         
         while currentNode <> Invalid
@@ -44,6 +49,7 @@ function CComponentLibrary()
     
     this.fRender = function()
         
+        m.screen.Clear(&h000000ff)
         currentNode = m.appObjectDLL.head
         
         while currentNode <> Invalid
