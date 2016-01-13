@@ -1,6 +1,6 @@
 function CTextComponent (textDescriptor, fontManager)
 
-    this = CComponentBase()
+    this = CComponentBase(textDescriptor)
 
     this.componentType = textDescriptor.componentType
     

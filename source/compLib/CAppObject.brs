@@ -11,7 +11,7 @@ function CAppObject()
         end if
         
         if (m.componentAA <> Invalid)
-            for i=0 to m.componentAA.Count() step 1
+            for i=0 to m.componentAA.Count() - 1 step 1
                 if (m.componentAA[i].componentType = componentType)
                     return m.componentAA[i]
                 end if    
@@ -39,7 +39,7 @@ function CAppObject()
     
     'componentDescriptor: AA of fields that describe the component
     this.fAddComponent = function (newComponent as Object)
-        
+
         if (m.componentAA = Invalid)
             m.componentAA = []
         end if

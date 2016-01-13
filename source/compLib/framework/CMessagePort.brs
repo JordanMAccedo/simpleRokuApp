@@ -12,6 +12,8 @@ function CMessagePort()
         
             if (Type(currentMessage) = "roTextureRequestEvent")
                 m.fHandleImageLoadMessage(currentMessage)
+            else if (Type(currentMessage) = "roUniversalControlEvent")
+                m.fHandleInputMessage(currentMessage)
             end if
         
         end if
@@ -37,6 +39,13 @@ function CMessagePort()
         end if
 
     end function    'fHandleImageLoadMessage
+    
+    
+    this.fHandleInputMessage = function(universalControlEvent)
+    
+        m.eventDispatcher.fDispatchEvent ( CInputEvent(universalControlEvent.GetInt()) )
+    
+    end function    'fHandleInputMessage
     
     
     return this

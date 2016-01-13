@@ -1,6 +1,6 @@
 function CShapeComponent(shapeDescriptor) as Object
 
-    this = CComponentBase()
+    this = CComponentBase(shapeDescriptor)
     
     this.componentType = shapeDescriptor.componentType
         

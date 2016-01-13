@@ -1,4 +1,4 @@
-function CComponentBase() as Object
+function CComponentBase(descriptor = Invalid) as Object
 
     'make sure the global componentCount value is ready
     if( GetGlobalAA().componentCount = Invalid)
@@ -7,9 +7,15 @@ function CComponentBase() as Object
     
     this = {}
     this.active = true
-    this.componentType = "base"
+    
     this.renderer = Invalid             'TODO: allow a component to have multiple renderers
-    this.appObject = Invalid        'reference to the CAppObject that contains this component
+    this.appObject = Invalid        'reference to the CAppObject or component that contains this component
+
+    this.componentType = "base"
+
+    if (descriptor <> Invalid)
+        this.componentType = descriptor.componentType
+    end if
 
     'assign each component a unique id and increment the global count
     this.id = GetGlobalAA().componentCount
@@ -33,6 +39,7 @@ function CComponentBase() as Object
     end function 'Deactivate
 
 
+    'the host object is usually a CAppObject, but can also be another component
     this.fSetAppObjectReference = function (appObjectReference)
         m.appObject = appObjectReference
         m.fOnAddedToObject()

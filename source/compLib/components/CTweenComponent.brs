@@ -1,6 +1,6 @@
 function CTweenComponent (tweenDescriptor) as Object
 
-    this = CComponentBase()
+    this = CComponentBase(tweenDescriptor)
     
     this.active = true 'tweenDescriptor.startActive
     this.targetValuePath = tweenDescriptor.targetValuePath

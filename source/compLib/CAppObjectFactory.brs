@@ -9,9 +9,10 @@ function CAppObjectFactory()
     
         'loop through all component descriptors in appObjectDescriptor
         'create and add them all
-        
         for i=0 to appObjectDescriptorArray.Count() - 1
-            createdComponent = m.fCreateComponentFromDescriptor (appObjectDescriptorArray[i])
+            temp = appObjectDescriptorArray[i]
+
+            createdComponent = m.fCreateComponentFromDescriptor (temp)
            
             if (createdComponent <> Invalid)
                 newAppObject.fAddComponent (createdComponent)
@@ -20,7 +21,7 @@ function CAppObjectFactory()
         return newAppObject
     end function 'fBuildAppObject
 
-    this.fCreateComponentFromDescriptor = function(descriptor as Object)
+    this.fCreateComponentFromDescriptor = function(descriptor)
             
         'create the ComponentBase that the new component will use as a prototype
         createdComponent = Invalid
@@ -34,9 +35,23 @@ function CAppObjectFactory()
             createdComponent.fShow()
         else if (descriptor.componentType = "tween")
             createdComponent = CTweenComponent(descriptor)
-        else if (descriptor.componentType = "bitmap")
-            createdComponent = CBitmapComponent(descriptor)
+        else if (descriptor.componentType = "bitmapLoader")
+            createdComponent = CBitmapLoaderComponent(descriptor)
             createdComponent.fShow()
+        else if (descriptor.componentType = "list")
+            elementComponents = []
+            
+            for i = 0 to descriptor.content.Count() - 1 step 1
+            
+                elementComponents.Push( m.fCreateComponentFromDescriptor( descriptor.content[i] ) )
+                
+            end for
+            
+            createdComponent = CListComponent(descriptor, elementComponents)
+            
+            createdComponent.fShow()
+        else
+            print "unknown component specified"
         end if
         
         

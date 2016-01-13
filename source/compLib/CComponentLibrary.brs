@@ -5,6 +5,7 @@ function CComponentLibrary()
     GetGlobalAA().appTime = CAppTime(60)
     GetGlobalAA().globalMessagePort = CMessagePort()
     GetGlobalAA().bitmapCache = CBitmapCache()
+    GetGlobalAA().globalTweener = CTweener()
 
     this = {}
     this.appObjectFactory = CAppObjectFactory()
@@ -15,6 +16,8 @@ function CComponentLibrary()
     dispatcher = GetGlobalAA().eventDispatcher 
     dispatcher.fAddEventListener("CTimeEvent", "ComponentLibrary", "fOnAppTimeTick", this)
     
+    globalMPort = GetGlobalAA().globalMessagePort
+    this.screen.SetMessagePort(globalMPort.messagePort)
     
     'this starts the main loop (contained in CAppTime)
     this.fStart = function()
